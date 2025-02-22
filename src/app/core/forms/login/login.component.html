@@ -1,10 +1,12 @@
-<div
+<form
+  [formGroup]="loginForm"
   class="flex flex-col px-8 py-8 gap-6 rounded-2xl"
   style="border-radius: 12px"
 >
   <div class="inline-flex flex-col gap-2">
     <label for="username" class="text-primary-50 font-semibold">Correo</label>
     <input
+      formControlName="email"
       pInputText
       id="username"
       class="!bg-white/20 border !p-4 !text-primary-50 w-80"
@@ -15,6 +17,7 @@
       >Contraseña</label
     >
     <input
+      formControlName="password"
       pInputText
       id="password"
       class="bg-white border !p-4 !text-primary-50 w-80"
@@ -38,4 +41,4 @@
       class="w-full"
     />
   </div>
-</div>
+</form>

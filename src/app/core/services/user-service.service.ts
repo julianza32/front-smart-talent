@@ -6,29 +6,31 @@ import { ILogin, IUser } from '../interfaces/user.interface';
   providedIn: 'root',
 })
 export class UserServiceService {
+  
   constructor(private http: HttpClient) {}
+  private apiUrl = environment.apiUrl;
   getUsers() {
-    return this.http.get<IUser[]>(`${environment.apiUrl}/users/all`);
+    return this.http.get<IUser[]>(`${this.apiUrl}/users/all`);
   }
   register(formRegister: IUser) {
-    return this.http.post<IUser>(`${environment.apiUrl}/users/create`, {
+    return this.http.post<IUser>(`${this.apiUrl}/users/create`, {
       formRegister
     });
   }
   getUser(id: string) {
-    return this.http.get<IUser>(`${environment.apiUrl}/users/${id}`);
+    return this.http.get<IUser>(`${this.apiUrl}/users/${id}`);
   }
   editUser(formEdit: IUser) {
-    return this.http.put<IUser>(`${environment.apiUrl}/users/update/${formEdit.id}`, {
+    return this.http.put<IUser>(`${this.apiUrl}/users/update/${formEdit.id}`, {
       formEdit
     });
   }
   deleteUser(id: string) {
-    return this.http.delete<IUser>(`${environment.apiUrl}/users/${id}`);
+    return this.http.delete<IUser>(`${this.apiUrl}/users/${id}`);
   }
 
   login(formLogin: ILogin) {
-    return this.http.post<IUser>(`${environment.apiUrl}/users/login`, formLogin);
+    return this.http.post<IUser>(`${this.apiUrl}/users/login`, formLogin);
   }
 
 }

@@ -4,7 +4,7 @@
     <app-contain-modal
       [visible]="showModal"
     >
-    <app-login></app-login>
+    <app-login (hidden)="openModal($event)"></app-login>
 </app-contain-modal>
   </div>
 </div>

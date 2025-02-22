@@ -42,12 +42,12 @@
         >
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button (click)="showModal()" class="text-sm/6 font-semibold text-gray-900">
+        <button *ngIf="!this.sesion" (click)="showModal()" class="text-sm/6 font-semibold text-gray-900">
           Iniciar sesión <span aria-hidden="true">&rarr;</span>
         </button>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button  class="text-sm/6 font-semibold text-gray-900">
+        <button *ngIf="this.sesion" (click)="closeSesion()" class="text-sm/6 font-semibold text-gray-900">
           Cerrar sesión <span aria-hidden="true"> &#x78;</span>
         </button>
 

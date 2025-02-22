@@ -12,13 +12,9 @@ import { LoginComponent } from '../../core/forms/login/login.component';
   standalone: true,
 })
 export class HomeComponent {
-  componentLogin: any = null;
   showModal = false;
 
   openModal(event: boolean) {
-    this.componentLogin = LoginComponent;
-    console.log(this.componentLogin);
-    
     this.showModal = event;
   }
 }
