@@ -1,0 +1,10 @@
+<div>
+  <app-header (openModal)="openModal($event)"></app-header>
+  <div class="min-h-screen flex flex-col items-center justify-center">
+    <app-contain-modal
+      [visible]="showModal"
+    >
+    <app-login></app-login>
+</app-contain-modal>
+  </div>
+</div>
