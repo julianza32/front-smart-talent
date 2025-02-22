@@ -15,4 +15,5 @@ export const routes: Routes = [
         (m) => m.MyReservationsComponent
       ),
   },
+  { path: '',   redirectTo: '/home', pathMatch: 'full' },
 ];
