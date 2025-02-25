@@ -1,10 +1,10 @@
 <div>
-  <app-header (openModal)="openModal($event)"></app-header>
-  <div class="min-h-screen flex flex-col items-center justify-center">
-    <app-contain-modal
-      [visible]="showModal"
-    >
-    <app-login (hidden)="openModal($event)"></app-login>
-</app-contain-modal>
+  <app-header ></app-header>
+  <div class="min-h-screen" style="margin-top: 150px">
+    <app-modal-login >
+    <app-login></app-login>
+    </app-modal-login>
+    <app-galleria [images]="images"></app-galleria>
+    <app-tabs-home></app-tabs-home>
   </div>
 </div>

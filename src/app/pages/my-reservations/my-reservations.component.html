@@ -1,1 +1,11 @@
-<p>my-reservations works!</p>
+<div>
+  <app-header></app-header>
+  <div class="min-h-screen" style="margin-top: 150px">
+    <app-modal-login>
+      <app-login></app-login>
+    </app-modal-login>
+    <app-galleria [images]="images"></app-galleria>
+    <app-list-reservations></app-list-reservations>
+  </div>
+</div>
+

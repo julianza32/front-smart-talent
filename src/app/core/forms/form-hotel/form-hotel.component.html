@@ -1,0 +1,39 @@
+<form [formGroup]="formHotel">
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="name" class="w-full" formControlName="name" />
+      <label for="name">Nombre</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="location" class="w-full" formControlName="location" />
+      <label for="location">Ubicación</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <textarea
+        pInputText
+        id="details"
+        class="w-full"
+        formControlName="details"
+      ></textarea>
+      <label for="details">Detalles</label>
+    </p-floatlabel>
+  
+    <button
+    *ngIf="!hotel"
+      class="mt-5 mr-1"
+      pButton
+      (click)="create()"s
+      label="Crear"
+      [disabled]="formHotel.invalid"
+    ></button>
+    <button
+    *ngIf="hotel"
+      class="mt-5 ml-1"
+      pButton
+      type="button"
+      label="Editar"
+      (click)="edit()"
+      [disabled]="formHotel.invalid"
+    ></button>
+  </form>

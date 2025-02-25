@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
+import { ModalService } from '../../core/services/modal.service';
 
 @Component({
   selector: 'app-contain-modal',
@@ -9,8 +10,17 @@ import { DialogModule } from 'primeng/dialog';
   imports: [CommonModule, DialogModule],
   styleUrls: ['./contain-modal.component.sass'],
 })
-export class ContainModalComponent  {
-  @Input() visible = false;
+export class ContainModalComponent {
+  visible = false;
 
+  serviceModal = inject(ModalService);
+  ngOnInit() {
+    this.serviceModal.modal$.subscribe((visible: boolean) => {
+      this.visible = visible;
+    });
+  }
 
+  ngOnDestroy() {
+    this.serviceModal.setState(false);
+  }
 }

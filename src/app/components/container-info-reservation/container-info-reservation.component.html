@@ -1,0 +1,75 @@
+<div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="mx-auto max-w-2xl lg:mx-0">
+    <h2
+      class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl"
+    >
+      Lista de reservas por usuario
+    </h2>
+  </div>
+  <div class="mt-16">
+    <form
+      [formGroup]="formSearch"
+      (ngSubmit)="submitForm()"
+      class="flex flex-row flex-wrap justify-start items-center"
+    >
+      <p-floatlabel variant="in" class="mr-10">
+        <input pInputText id="idNumber" class="" formControlName="search" />
+        <label for="idNumber">Identificación</label>
+      </p-floatlabel>
+
+      <p-button
+        icon="pi pi-search"
+        [rounded]="true"
+        [text]="true"
+        [raised]="true"
+        severity="success"
+        type="submit"
+      />
+    </form>
+  </div>
+
+  <div
+    class="mx-auto mt-5 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+  >
+    <article
+      class="flex max-w-xl flex-col items-start justify-between"
+      *ngFor="let reservation of reservations"
+    >
+      <div (click)="navigateToReservation(reservation.reservation.id)">
+        <div class="flex items-center gap-x-4 text-xs">
+          <p
+            class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+          >
+            Reservación
+          </p>
+        </div>
+        <div class="group relative">
+          <h3
+            class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600"
+          >
+            <p>
+              <span class="absolute inset-0"></span>
+              {{ reservation.hotel.name }}
+            </p>
+          </h3>
+          <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+            checkIn {{ reservation.reservation.checkIn | date : "dd-MM-yyyy" }}
+          </p>
+          <p class="line-clamp-3 text-sm/6 text-gray-600">
+            checkOut
+            {{ reservation.reservation.checkOut | date : "dd-MM-yyyy" }}
+          </p>
+          <p class="line-clamp-3 text-sm/6 text-gray-600">
+            {{ reservation.reservation.status }}
+          </p>
+        </div>
+
+        <div class="relative mt-8 flex items-center gap-x-4">
+          <div class="text-sm/6">
+            <p class="text-gray-600">{{ reservation.hotel.location }}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="mt-10 p-10">
+  <div class="flex flex-row flex-wrap justify-between items-center">
+    <p class="font-semibold w-full lg:w-1/2 md:text-5xl ">Lista de habitaciones</p>
+    <p-floatlabel variant="in" class="w-full lg:w-1/2 mt-5 mb-7">
+      <p-select
+        id="type"
+        class="w-full"
+        [(ngModel)]="id_hotel"
+        [options]="listHotels"
+        (onChange)="getRooms()"
+        placeholder="Seleccione un Hotel"
+      ></p-select>
+      <label for="type">Hotel</label>
+    </p-floatlabel>
+  </div>
+  <hr />
+  <p-table [value]="listRooms" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Nro habitación</th>
+        <th>Tipo</th>
+        <th>Costo base</th>
+        <th>Impuesto</th>
+        <th>Ubicacion</th>
+        <th>Estado</th>
+
+        <th>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-plus"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="createRoom()"
+          ></button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-room>
+      <tr>
+        <td>{{ room.number_room }}</td>
+        <td>{{ room.type }}</td>
+        <td>{{ room.base_cost }}</td>
+        <td>{{ room.taxes }}</td>
+        <td>{{ room.location }}</td>
+        <td>{{ room.status }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="editRoom(room)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="deleteRoom(room)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-contain-modal>
+  <app-form-room
+    [room]="room"
+    [id_hotel]="id_hotel"
+    (saveRoom)="refresh()"
+  ></app-form-room>
+</app-contain-modal>

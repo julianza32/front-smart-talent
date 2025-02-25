@@ -1,0 +1,154 @@
+<div *ngIf="!loading" class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center">
+      <h2 class="text-base/7 font-semibold text-indigo-600">Tu reserva</h2>
+      <p
+        class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance"
+      >
+        {{ reservation.hotel.name }}
+      </p>
+      <p class="mt-6 text-lg/8 text-gray-600">
+        {{ reservation.hotel.details }}
+      </p>
+    </div>
+    <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+      <dl
+        class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16"
+      >
+        <div class="relative pl-16">
+          <dt class="text-base/7 font-semibold text-gray-900">
+            <div
+              class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+            >
+              <i class="pi pi-map-marker" style="color: white"></i>
+            </div>
+            {{ reservation.hotel.location }}, {{ reservation.room.location }} -
+            {{ reservation.room.number_room }}
+          </dt>
+        </div>
+        <div class="relative pl-16">
+          <dt class="text-base/7 font-semibold text-gray-900">
+            <div
+              class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+            >
+              <i class="pi pi-clock" style="color: white"></i>
+            </div>
+            <p>
+              check - in:
+              {{ reservation.reservation.checkIn | date : "dd-MM-yyyy" }}
+            </p>
+            <p>
+              check - out:
+              {{ reservation.reservation.checkOut | date : "dd-MM-yyyy" }}
+            </p>
+          </dt>
+        </div>
+        <div class="relative pl-16">
+          <dt class="text-base/7 font-semibold text-gray-900">
+            <div
+              class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+            >
+              <i class="pi pi-users" style="color: white"></i>
+            </div>
+            <div class="flex w-full items-center justify-between">
+              <div
+                class="w-full"
+                *ngFor="let guest of reservation.reservation.guests"
+              >
+                <p>{{ guest.name }}, {{ guest.documentNumber }}</p>
+              </div>
+            </div>
+          </dt>
+        </div>
+        <div class="relative pl-16">
+          <dt class="text-base/7 font-semibold text-gray-900">
+            <div
+              class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+            >
+              <i class="pi pi-tag" style="color: white"></i>
+            </div>
+            {{ reservation.reservation.status }}
+          </dt>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" >
+  <div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl lg:text-center">
+        <h2 class="text-base/7 font-semibold text-indigo-600 text-center">
+          <p-skeleton width="100%" height="2rem" />
+        </h2>
+        <p
+          class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance"
+        >
+          <p-skeleton width="100%" height="2rem" />
+        </p>
+        <p class="mt-6 text-lg/8 text-gray-600">
+          <p-skeleton width="100%" height="2rem" />
+        </p>
+      </div>
+      <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+        <dl
+          class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16"
+        >
+          <div class="relative pl-16">
+            <dt class="text-base/7 font-semibold text-gray-900">
+              <div
+                class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+              >
+              <p-skeleton  size="3rem" styleClass="mr-2" />
+            </div>
+              <p-skeleton width="100%" height="2rem" />
+            </dt>
+          </div>
+          <div class="relative pl-16">
+            <dt class="text-base/7 font-semibold text-gray-900">
+              <div
+                class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+              >
+              <p-skeleton  size="3rem" styleClass="mr-2" />
+            </div>
+              <p>
+                <p-skeleton width="100%" height="2rem" />
+              </p>
+              <p>
+                <p-skeleton width="100%" height="2rem" />
+              </p>
+            </dt>
+          </div>
+          <div class="relative pl-16">
+            <dt class="text-base/7 font-semibold text-gray-900">
+              <div
+                class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+              >
+              <p-skeleton  size="3rem" styleClass="mr-2" />
+            </div>
+              <div class="flex w-full items-center justify-between">
+                <div class="w-full">
+                  <p-skeleton  width="100%" height="2rem" />
+                  <p-skeleton class="mt-5" width="100%" height="2rem" />
+                  <p-skeleton class="mt-5" width="100%" height="2rem" />
+                  <p-skeleton class="mt-5" width="100%" height="2rem" />
+                  <p-skeleton class="mt-5" width="100%" height="2rem" />
+                </div>
+              </div>
+            </dt>
+          </div>
+          <div class="relative pl-16">
+            <dt class="text-base/7 font-semibold text-gray-900">
+              <div
+                class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-black"
+              >
+              <p-skeleton  size="3rem" styleClass="mr-2" />
+            </div>
+              <p-skeleton width="100%" height="2rem" />
+            </dt>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>

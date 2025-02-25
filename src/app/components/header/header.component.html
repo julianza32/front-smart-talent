@@ -35,22 +35,27 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Home</a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900">Hoteles</a>
-        <a href="#" class="text-sm/6 font-semibold text-gray-900"
+        <a href="/home" class="text-sm/6 font-semibold text-gray-900">Home</a>
+        <a href="/my-reservations" class="text-sm/6 font-semibold text-gray-900"
           >Mis reservas</a
         >
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button *ngIf="!this.sesion" (click)="showModal()" class="text-sm/6 font-semibold text-gray-900">
+        <button
+          *ngIf="!sessionSignal()"
+          (click)="showModal()"
+          class="text-sm/6 font-semibold text-gray-900"
+        >
           Iniciar sesión <span aria-hidden="true">&rarr;</span>
         </button>
-      </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button *ngIf="this.sesion" (click)="closeSesion()" class="text-sm/6 font-semibold text-gray-900">
+      
+        <button
+          *ngIf="sessionSignal()"
+          (click)="closeSesion()"
+          class="text-sm/6 font-semibold text-gray-900"
+        >
           Cerrar sesión <span aria-hidden="true"> &#x78;</span>
         </button>
-
       </div>
     </nav>
     <div

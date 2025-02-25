@@ -1,0 +1,82 @@
+<div class="mt-10 p-10">
+    <p class="font-semibold w-full md:text-5xl mb-3">Lista de Hoteles   </p> 
+     <hr />
+    <p-table [value]="listHotels" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>Nombre</th>
+          <th>Ubicación</th>
+          <th>Detalles</th>
+          <th>Estado</th>
+          <th> <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-plus"
+            class="p-button-rounded mx-1 "
+            style="color: black"
+          
+            (click)="createHotel()"
+          ></button></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-hotel>
+        <tr>
+          <td>{{ hotel.name }}</td>
+          <td>{{ hotel.location }}</td>
+          <td>{{ hotel.details }}</td>
+          <td>{{ hotel.is_active.toLowerCase() === 'true' ? 'Activo' : 'inactivo' }} </td>
+          <td>
+            <button
+              pButton
+              pRipple
+              text
+              rounded
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded mx-1 "
+              style="color: black"
+  
+              (click)="editHotel(hotel)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              text
+              rounded
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded mx-1"
+              style="color: black"
+              (click)="deleteHotel(hotel)"
+
+
+            ></button>
+
+            <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-power-off"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="toggleActive(hotel)"
+
+
+          ></button>
+
+            
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <app-contain-modal>
+    <app-form-hotel [hotel]="hotel" (refresh)="refresh()"></app-form-hotel>
+  </app-contain-modal>
+  

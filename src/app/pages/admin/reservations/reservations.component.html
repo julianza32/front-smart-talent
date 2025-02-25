@@ -1,0 +1,84 @@
+<div class="mt-10 p-10">
+  <p class="font-semibold w-full md:text-5xl mb-3">Lista de usuarios</p>
+  <hr />
+  <p-table [value]="listReservations" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Nombre del reservador</th>
+        <th>Nombre de hotel</th>
+        <th>Nro habitación</th>
+        <th>Fecha de entrada</th>
+        <th>Fecha de salida</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-listReservation>
+      <tr>
+        <td>{{ listReservation.guests[0].name }}</td>
+        <td>{{ listReservation.name_hotel }}</td>
+        <td>{{ listReservation.number_room }}</td>
+        <td>{{ listReservation.checkIn | date : 'dd-MM-yyyy' }}</td>
+        <td>{{ listReservation.checkOut | date : 'dd-MM-yyyy' }}</td>
+        <td>{{ listReservation.status }}</td>
+
+        <td>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-check"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="changeStatus(listReservation.id, 'Confirmada')"
+          ></button>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-times"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="changeStatus(listReservation.id, 'Cancelada')"
+          ></button>
+          <button
+            pButton
+            pRipple
+            text
+            rounded
+            type="button"
+            icon="pi pi-users"
+            class="p-button-rounded mx-1"
+            style="color: black"
+            (click)="openGuest(listReservation.guests)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-contain-modal>
+  <div class="w-full mt-5">
+    <p-table [value]="guest" [tableStyle]="{ width: '100%' }">
+      <ng-template #header>
+        <tr>
+          <th>Tipo de documento</th>
+          <th>Numero</th>
+          <th>Nombre</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-guest>
+        <tr>
+          <td>{{ guest.documentType }}</td>
+          <td>{{ guest.documentNumber }}</td>
+          <td>{{ guest.name }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</app-contain-modal>

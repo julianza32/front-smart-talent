@@ -1,0 +1,82 @@
+<form
+  [formGroup]="formGuest"
+  (ngSubmit)="submitForm()"
+  class="flex w-full lex-row flex-wrap justify-between
+  "
+>
+  <div class="px-2 w-full mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <input pInputText id="name" class="w-full" formControlName="name" />
+      <label for="name">Nombres</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="px-2 mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <p-datepicker
+        id="birthDate"
+        class="w-full full-width-calendar"
+        showIcon
+        formControlName="birthDate"
+      />
+      <label for="birthDate">Fecha de Nacimiento</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="px-2 mt-5 lg:w-1/5 w-full">
+    <p-floatlabel variant="in" class="w-full">
+      <p-select
+        id="documentType"
+        class="w-full"
+        formControlName="documentType"
+        [options]="options"
+      />
+      <label for="documentType">Tipo de Documento</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="px-2 mt-5 lg:w-1/2 w-full">
+    <p-floatlabel variant="in" class="w-full">
+      <input
+        pInputText
+        id="documentNumber"
+        class="w-full"
+        formControlName="documentNumber"
+      />
+      <label for="documentNumber">Número de Documento</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="px-2 lg:w-1/2 w-full mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <input
+        pInputText
+        id="email"
+        type="email"
+        class="w-full"
+        formControlName="email"
+      />
+      <label for="email">Correo Electrónico</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="px-2 lg:w-1/2 w-full mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <input
+        pInputText
+        id="phone"
+        type="tel"
+        class="w-full"
+        formControlName="phone"
+      />
+      <label for="phone">Teléfono</label>
+    </p-floatlabel>
+  </div>
+  <button
+    class="mt-5 mr-1"
+    pButton
+    type="submit"
+    label="Guardar"
+    [disabled]="formGuest.invalid"
+  ></button>
+</form>

@@ -2,13 +2,13 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { UserServiceService } from '../../services/user-service.service';
 import {
-  FormGroup,
-  FormControl,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ILogin, IUser } from '../../interfaces/user.interface';
+import { Router } from '@angular/router';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +19,11 @@ import { ILogin, IUser } from '../../interfaces/user.interface';
 })
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);
-  @Output() hidden = new EventEmitter<boolean>();
-  constructor(private readonly userService: UserServiceService) {}
-  showDialog() {
-    this.hidden.emit(false);
-  }
+  private router = inject(Router);
+  private userService = inject(UserServiceService);
+  private modalService = inject(ModalService);  
+  constructor() {}
+
 
   loginForm = this.formBuilder.group({
     email: ['', Validators.required],
@@ -35,12 +35,17 @@ export class LoginComponent {
       .login(this.loginForm.getRawValue() as ILogin)
       .subscribe((response: IUser) => {
         if (response.id) {
-          this.showDialog();
-          this.loginForm.reset();
-          localStorage.setItem('Session', JSON.stringify(response));
+          localStorage.setItem('session', JSON.stringify(response));
 
-
+          if (response.type.toString() === 'Agente') {
+            this.router.navigate(['admin']);
+            this.cancel();
+          }
         }
       });
+  }
+  cancel() {
+    this.modalService.setStateLogin(false);
+    this.loginForm.reset();
   }
 }

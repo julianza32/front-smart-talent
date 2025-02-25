@@ -1,0 +1,48 @@
+<form [formGroup]="formRoom">
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <p-select 
+        id="type"
+        class="w-full"
+        formControlName="type"
+        [options]="typeOptions"
+        placeholder="Seleccione el tipo de habitación"
+      ></p-select>
+      <label for="type">Tipo de Habitación</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="base_cost" class="w-full" formControlName="base_cost" type="number" />
+      <label for="base_cost">Costo Base</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="taxes" class="w-full" formControlName="taxes" type="number" />
+      <label for="taxes">Impuestos</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="location" class="w-full" formControlName="location" />
+      <label for="location">Ubicación</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <p-select 
+        id="status"
+        class="w-full"
+        formControlName="status"
+        [options]="statusOptions"
+        placeholder="Seleccione el estado de la habitación"
+      ></p-select>
+      <label for="status">Estado</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="number_room" class="w-full" formControlName="number_room" type="number" />
+      <label for="number_room">Número de Habitación</label>
+    </p-floatlabel>
+  
+    <div class="flex mt-5">
+        <button pButton *ngIf="!room" (click)="createRoom()"  label="Crear" class="mr-2" [disabled]="formRoom.invalid"></button>
+        <button pButton *ngIf="room" (click)="editRoom()"  label="Editar" class="ml-2" [disabled]="formRoom.invalid"></button>
+      </div>
+  </form>

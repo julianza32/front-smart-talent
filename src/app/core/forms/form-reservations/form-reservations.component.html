@@ -1,0 +1,119 @@
+<form
+  [formGroup]="formReservation"
+  (ngSubmit)="submitForm()"
+  class="flex flex-row flex-wrap justify-between"
+>
+  <div class="w-full px-2 flex md:flex-row justify-between flex-col lg:w-1/2 px-2">
+    <p-floatlabel variant="in" class="w-full lg:w-1/2 mt-5">
+      <p-calendar
+        id="checkIn"
+        class="w-full"
+        formControlName="checkIn"
+        showIcon
+      ></p-calendar>
+      <label for="checkIn">Fecha de Check-In</label>
+    </p-floatlabel>
+    <p-floatlabel variant="in" class="w-full lg:w-1/2 mt-5">
+      <p-calendar
+        id="checkOut"
+        class="w-full"
+        formControlName="checkOut"
+        showIcon
+      ></p-calendar>
+      <label for="checkOut">Fecha de Check-Out</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="w-full lg:w-1/2 px-2 mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <p-inputnumber
+        formControlName="numberOfGuests"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        [min]="0"
+        id="numberOfGuests"
+        class="w-full"
+      >
+        <ng-template #incrementbuttonicon>
+          <span class="pi pi-plus"></span>
+        </ng-template>
+        <ng-template #decrementbuttonicon>
+          <span class="pi pi-minus"></span>
+        </ng-template>
+      </p-inputnumber>
+      <label for="numberOfGuests">Numero de personas</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="w-full lg:w-1/2 px-2 mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <input
+        pInputText
+        id="nameEmergencyContact"
+        class="w-full"
+        formControlName="nameEmergencyContact"
+      />
+      <label for="nameEmergencyContact">Nombre de Contacto de Emergencia</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="w-full lg:w-1/2 px-2 mt-5">
+    <p-floatlabel variant="in" class="w-full">
+      <input
+        pInputText
+        id="phoneEmergencyContact"
+        class="w-full"
+        formControlName="phoneEmergencyContact"
+      />
+      <label for="phoneEmergencyContact"
+        >Teléfono de Contacto de Emergencia</label
+      >
+    </p-floatlabel>
+  </div>
+  <div class="w-full">
+    <app-form-guest (addGuest)="addGuest($event)"></app-form-guest>
+
+  </div>
+
+  <div class="w-full mt-5" *ngIf="listGuests.length > 0">
+    <p-table [value]="listGuests" [tableStyle]="{ width: '100%' }">
+      <ng-template #header>
+        <tr>
+          <th>Tipo de documento</th>
+          <th>Numero</th>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-guest>
+        <tr>
+          <td>{{ guest.documentType }}</td>
+          <td>{{ guest.documentNumber }}</td>
+          <td>{{ guest.name }}</td>
+          <td>
+            <button
+              pButton
+              icon="pi pi-times"
+              (click)="removeGuest(guest)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="w-full flex justify-end">
+    <button
+      class="mt-5"
+      pButton
+      type="submit"
+      label="Guardar Reserva"
+      [disabled]="
+          formReservation.invalid || 
+          listGuests.length !== formReservation.get('numberOfGuests')?.value
+      "
+    ></button>
+  </div>
+</form>
