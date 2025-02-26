@@ -5,7 +5,7 @@
       "redirect": "/"
     },
     {
-      "route": "/my-reservations",
+      "route": "my-reservations",
       "redirect": "/my-reservations"
     }
   ]
