@@ -3,6 +3,10 @@
     {
       "route": "home",
       "redirect": "/"
+    },
+    {
+      "route": "/my-reservations",
+      "redirect": "/my-reservations"
     }
   ]
 }
