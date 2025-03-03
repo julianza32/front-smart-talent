@@ -22,7 +22,7 @@ import { SelectModule } from 'primeng/select';
     ReactiveFormsModule,
     ButtonModule,
     CalendarModule,
-    DatePickerModule,
+
     SelectModule
   ],
   templateUrl: './form-guest.component.html',
@@ -37,7 +37,9 @@ export class FormGuestComponent {
     { label: 'DNI', value: 'DNI' },
     { label: 'Pasaporte', value: 'Pasaporte' },
   ];
-  formGuest: FormGroup = this.formBuilder.group({
+public maxDate = new Date();
+public minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 100));
+formGuest: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
     birthDate: [null, Validators.required],
     documentType: ['', Validators.required],

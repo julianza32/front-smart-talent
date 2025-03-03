@@ -4,6 +4,8 @@ import { HotelsServiceService } from '../../core/services/hotels-service.service
 import { IHotels } from '../../core/interfaces/hotels.interface';
 import { LoadingComponent } from "../loading/loading.component";
 import { CommonModule } from '@angular/common';
+import { ImageHotelsService } from '../../core/services/image-hotels.service';
+import { IResponseHits } from '../../core/interfaces/response_images.interface';
 
 @Component({
   selector: 'app-list-hotels-home',
@@ -17,6 +19,8 @@ export class ListHotelsHomeComponent implements OnInit {
   loading = true;
   @Output() changeTab = new EventEmitter<string>(); 
   hotelService = inject(HotelsServiceService);
+  imageService = inject(ImageHotelsService);
+  listImages: IResponseHits[] = [];
   ngOnInit() {
     this.getHotels();
   }
@@ -25,8 +29,13 @@ export class ListHotelsHomeComponent implements OnInit {
     this.loading = true
     this.hotelService.getHotels().subscribe((hotels: IHotels[]) => {
       this.listHotels = hotels;
-      this.loading = false;
     });
+    this.imageService.getHotelsImages('1', this.listHotels.length<3 ? '5': this.listHotels.length.toString()).subscribe((response) => {
+      this.listImages = response;
+      this.loading = false;
+    
+    });
+
   }
 
 

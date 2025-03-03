@@ -1,5 +1,24 @@
-<p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
-  
-    <ng-content></ng-content>
-  
+<p-dialog
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '70%' }"
+  [breakpoints]="{ '1199px': '75%', '575px': '90%' }"
+  [maximizable]="true"
+>
+<div *ngIf="!showRegister" class="w-full flex justify-arround  bg-white rounded-2xl overflow-hidden shadow-lg">
+    <div class="w-3/5">
+        <img class="h-[500px]" src="{{imageHotel}}" alt="">
+    </div>
+    <div class="w-2/5">
+    <app-login (openRegister)="setShowRegister()"></app-login>
+        
+    </div>
+</div>
+<div *ngIf="showRegister" class="w-full flex justify-arround  bg-white rounded-2xl overflow-hidden shadow-lg">
+
+    <app-form-user [agent]="false" (saveUser)="setShowRegister()" class="w-full p-5"></app-form-user>
+    
+</div>
+
+
 </p-dialog>

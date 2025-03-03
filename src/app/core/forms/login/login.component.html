@@ -1,48 +1,32 @@
 
-<div class="flex items-center justify-center ">
-  <form
-    [formGroup]="loginForm"
-    class="flex w-1/2 flex-col px-8 py-8 gap-6 rounded-2xl"
-    style="border-radius: 12px"
-  >
-    <div class="inline-flex flex-col gap-2">
-      <label for="username" class="text-primary-50 font-semibold">Correo</label>
-      <input
-        formControlName="email"
-        pInputText
-        id="username"
-        class="!bg-white/20 border !p-4 !text-primary-50 w-80"
-      />
-    </div>
-    <div class="inline-flex flex-col gap-2">
-      <label for="password" class="text-primary-50 font-semibold"
-        >Contraseña</label
-      >
-      <input
-        formControlName="password"
-        pInputText
-        id="password"
-        class="bg-white border !p-4 !text-primary-50 w-80"
-        type="password"
-      />
-    </div>
-    <div class="flex items-center gap-4">
-      <p-button
-        label="Cancel"
-        (click)="cancel()"
-        [text]="true"
-        styleClass="!p-4 w-full !text-red-600 !border !border-white/30 hover:!bg-white/10"
-        class="w-full"
-      />
-      <p-button
-        label="Sign-In"
-        (click)="login()"
-        [text]="true"
-        styleClass="!p-4 w-full !text-black-600
-                      !border !border-white/30 hover:!bg-white/10"
-        class="w-full"
-      />
-    </div>
-  </form>
+    <form [formGroup]="loginForm"
+      class="flex flex-col w-full px-8 py-8 gap-6 relative bg-white rounded-r-2xl">
+      <h2 class="text-4xl font-bold text-gray-900">Iniciar sesión</h2>
+      <div class="inline-flex flex-col gap-2">
+        <label for="username" class="text-primary-50 font-semibold">Correo</label>
+        <input formControlName="email" pInputText id="username"
+          class="!bg-white/20 border !p-4 !text-primary-50 w-full" />
+      </div>
+      <div class="inline-flex flex-col gap-2">
+        <label for="password" class="text-primary-50 font-semibold">Contraseña</label>
+        <input formControlName="password" pInputText id="password" 
+          class="bg-white border !p-4 !text-primary-50 w-full" type="password" />
+      </div>
+      <div class="flex items-center gap-4">
+        <p-button label="Cancel" (click)="cancel()" [text]="true"
+          styleClass="!p-4 w-full !text-red-600 !border !border-white/30 hover:!bg-red-600 hover:!text-white"
+          class="w-full" />
+          <p-button label="Sign-In" (click)="login()" [text]="true"
+          styleClass="!p-4 w-full !text-white !border !border-white/30
+                      !bg-blue-400 hover:!bg-blue-600 !shadow-lg"
+          class="w-full" />
+      
+      </div>
 
-</div>
+        <div class="text-center text-primary-50">
+          <p (click)="openRegisterForm()" 
+          class="text-primary-50 underline cursor-pointer hover:text-primary-300 transition">
+         Regístrame
+       </p>
+               </div>
+    </form>

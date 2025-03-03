@@ -1,119 +1,72 @@
-<form
-  [formGroup]="formReservation"
-  (ngSubmit)="submitForm()"
-  class="flex flex-row flex-wrap justify-between"
->
-  <div class="w-full px-2 flex md:flex-row justify-between flex-col lg:w-1/2 px-2">
-    <p-floatlabel variant="in" class="w-full lg:w-1/2 mt-5">
-      <p-calendar
-        id="checkIn"
-        class="w-full"
-        formControlName="checkIn"
-        showIcon
-      ></p-calendar>
-      <label for="checkIn">Fecha de Check-In</label>
-    </p-floatlabel>
-    <p-floatlabel variant="in" class="w-full lg:w-1/2 mt-5">
-      <p-calendar
-        id="checkOut"
-        class="w-full"
-        formControlName="checkOut"
-        showIcon
-      ></p-calendar>
-      <label for="checkOut">Fecha de Check-Out</label>
-    </p-floatlabel>
-  </div>
-
-  <div class="w-full lg:w-1/2 px-2 mt-5">
-    <p-floatlabel variant="in" class="w-full">
-      <p-inputnumber
-        formControlName="numberOfGuests"
-        [showButtons]="true"
-        buttonLayout="horizontal"
-        inputId="horizontal"
-        spinnerMode="horizontal"
-        [step]="1"
-        [min]="0"
-        id="numberOfGuests"
-        class="w-full"
-      >
-        <ng-template #incrementbuttonicon>
-          <span class="pi pi-plus"></span>
-        </ng-template>
-        <ng-template #decrementbuttonicon>
-          <span class="pi pi-minus"></span>
-        </ng-template>
-      </p-inputnumber>
-      <label for="numberOfGuests">Numero de personas</label>
-    </p-floatlabel>
-  </div>
-
-  <div class="w-full lg:w-1/2 px-2 mt-5">
-    <p-floatlabel variant="in" class="w-full">
-      <input
-        pInputText
-        id="nameEmergencyContact"
-        class="w-full"
-        formControlName="nameEmergencyContact"
-      />
-      <label for="nameEmergencyContact">Nombre de Contacto de Emergencia</label>
-    </p-floatlabel>
-  </div>
-
-  <div class="w-full lg:w-1/2 px-2 mt-5">
-    <p-floatlabel variant="in" class="w-full">
-      <input
-        pInputText
-        id="phoneEmergencyContact"
-        class="w-full"
-        formControlName="phoneEmergencyContact"
-      />
-      <label for="phoneEmergencyContact"
-        >Teléfono de Contacto de Emergencia</label
-      >
-    </p-floatlabel>
-  </div>
-  <div class="w-full">
+<form [formGroup]="formReservation" (ngSubmit)="submitForm()" class="space-y-6">
+  <p-card class="bg-red-100 ">
+    <h3 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">Información de la Reserva</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p-floatlabel variant="in" class="w-full">
+        <p-calendar id="checkIn" class="w-full" formControlName="checkIn" showIcon [minDate]="min" [maxDate]="max"></p-calendar>
+        <label for="checkIn">Fecha de Check-In</label>
+      </p-floatlabel>
+      <p-floatlabel variant="in" class="w-full">
+        <p-calendar id="checkOut" class="w-full" formControlName="checkOut" [minDate]="formReservation.value.checkIn" showIcon [maxDate]="max"></p-calendar>
+        <label for="checkOut">Fecha de Check-Out</label>
+      </p-floatlabel>
+      <p-floatlabel variant="in" class="w-full">
+        <p-inputnumber formControlName="numberOfGuests" [showButtons]="true" [step]="1" [min]="1" id="numberOfGuests" class="w-full">
+          <ng-template #incrementbuttonicon><span class="pi pi-plus"></span></ng-template>
+          <ng-template #decrementbuttonicon><span class="pi pi-minus"></span></ng-template>
+        </p-inputnumber>
+        <label for="numberOfGuests">Número de Personas</label>
+      </p-floatlabel>
+    </div>
+  </p-card>
+  <p-card class="bg-red-100 m-8">
+    <h3 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">Contacto de Emergencia</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <p-floatlabel variant="in" class="w-full">
+        <input pInputText id="nameEmergencyContact" class="w-full" formControlName="nameEmergencyContact"/>
+        <label for="nameEmergencyContact">Nombre</label>
+      </p-floatlabel>
+      <p-floatlabel variant="in" class="w-full">
+        <input pInputText id="phoneEmergencyContact" class="w-full" formControlName="phoneEmergencyContact"/>
+        <label for="phoneEmergencyContact">Teléfono</label>
+      </p-floatlabel>
+    </div>
+  </p-card>
+  <p-card class="bg-red-100 m-8">
+    <h3 class="text-xl font-semibold text-gray-800 border-b pb-3 mb-4">Huéspedes</h3>
+    <span>* Recuerda llenar todos los huespedes que agregaste en el numero de personas anteriormente.</span>
+    <small *ngIf="listGuests.length !== formReservation.get('numberOfGuests')?.value" class="text-red-500">
+      *** Faltan por registrar {{ formReservation.get('numberOfGuests')?.value- listGuests.length }} huéspedes
+     </small>  
     <app-form-guest (addGuest)="addGuest($event)"></app-form-guest>
 
-  </div>
-
-  <div class="w-full mt-5" *ngIf="listGuests.length > 0">
-    <p-table [value]="listGuests" [tableStyle]="{ width: '100%' }">
-      <ng-template #header>
-        <tr>
-          <th>Tipo de documento</th>
-          <th>Numero</th>
-          <th>Nombre</th>
-          <th>Acciones</th>
-        </tr>
-      </ng-template>
-      <ng-template #body let-guest>
-        <tr>
-          <td>{{ guest.documentType }}</td>
-          <td>{{ guest.documentNumber }}</td>
-          <td>{{ guest.name }}</td>
-          <td>
-            <button
-              pButton
-              icon="pi pi-times"
-              (click)="removeGuest(guest)"
-            ></button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    <div class="w-full mt-4" *ngIf="listGuests.length > 0">
+      <p-table [value]="listGuests" [tableStyle]="{ width: '100%' }">
+        <ng-template #header>
+          <tr>
+            <th>Tipo de documento</th>
+            <th>Número</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-guest>
+          <tr>
+            <td>{{ guest.documentType }}</td>
+            <td>{{ guest.documentNumber }}</td>
+            <td>{{ guest.name }}</td>
+            <td>
+              <button pButton icon="pi pi-times" (click)="removeGuest(guest)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
   <div class="w-full flex justify-end">
-    <button
-      class="mt-5"
-      pButton
-      type="submit"
-      label="Guardar Reserva"
-      [disabled]="
-          formReservation.invalid || 
-          listGuests.length !== formReservation.get('numberOfGuests')?.value
-      "
-    ></button>
+    <button class="mt-5 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" pButton type="submit"
+      label="Reservar"
+      [disabled]="formReservation.invalid || listGuests.length !== formReservation.get('numberOfGuests')?.value">
+    </button>
   </div>
 </form>

@@ -36,5 +36,6 @@ export interface IReservations {
     name_hotel: string;
     number_room: number;
     emergencyContact: IEmergencyContact;
+    id_room: string;
     status: 'Confirmada' | 'Pendiente' | 'Cancelada';
   }

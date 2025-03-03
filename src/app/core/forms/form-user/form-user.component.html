@@ -1,28 +1,31 @@
-<h3 class="font-bold whitespace-nowrap">Usuario</h3>
+<div class="w-full">
+  <h3 class="font-bold whitespace-nowrap">Usuario</h3>
+  
+  <form [formGroup]="formUser" >
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="name" class="w-full" formControlName="name" />
+      <label for="name">Nombre</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="email" class="w-full" formControlName="email" type="email" />
+      <label for="email">Correo Electrónico</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="password" class="w-full" formControlName="password_hash" type="password" />
+      <label for="password">Contraseña</label>
+    </p-floatlabel>
+  
+    <p-floatlabel variant="in" class="w-full mt-5">
+      <input pInputText id="phone" class="w-full" formControlName="phone" type="tel" />
+      <label for="phone">Teléfono</label>
+    </p-floatlabel>
+  
+    <div class="flex mt-5">
+      <button pButton *ngIf="!user" (click)="createUser()"  label="Crear" class="mr-2" [disabled]="formUser.invalid"></button>
+      <button pButton *ngIf="user" (click)="editUser()"  label="Editar" class="ml-2" [disabled]="formUser.invalid"></button>
+    </div>
+  </form>
 
-<form [formGroup]="formUser" >
-  <p-floatlabel variant="in" class="w-full mt-5">
-    <input pInputText id="name" class="w-full" formControlName="name" />
-    <label for="name">Nombre</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="in" class="w-full mt-5">
-    <input pInputText id="email" class="w-full" formControlName="email" type="email" />
-    <label for="email">Correo Electrónico</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="in" class="w-full mt-5">
-    <input pInputText id="password" class="w-full" formControlName="password_hash" type="password" />
-    <label for="password">Contraseña</label>
-  </p-floatlabel>
-
-  <p-floatlabel variant="in" class="w-full mt-5">
-    <input pInputText id="phone" class="w-full" formControlName="phone" type="tel" />
-    <label for="phone">Teléfono</label>
-  </p-floatlabel>
-
-  <div class="flex mt-5">
-    <button pButton *ngIf="!user" (click)="createUser()"  label="Crear" class="mr-2" [disabled]="formUser.invalid"></button>
-    <button pButton *ngIf="user" (click)="editUser()"  label="Editar" class="ml-2" [disabled]="formUser.invalid"></button>
-  </div>
-</form>
+</div>

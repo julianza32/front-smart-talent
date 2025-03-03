@@ -1,5 +1,5 @@
 <div class="mt-10 p-10">
-  <p class="font-semibold w-full md:text-5xl mb-3">Lista de usuarios</p>
+  <p class="font-semibold w-full md:text-5xl mb-3">Lista de reservas</p>
   <hr />
   <p-table [value]="listReservations" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header>
@@ -32,7 +32,7 @@
             icon="pi pi-check"
             class="p-button-rounded mx-1"
             style="color: black"
-            (click)="changeStatus(listReservation.id, 'Confirmada')"
+            (click)="changeStatus(listReservation, 'Confirmada')"
           ></button>
           <button
             pButton
@@ -43,7 +43,7 @@
             icon="pi pi-times"
             class="p-button-rounded mx-1"
             style="color: black"
-            (click)="changeStatus(listReservation.id, 'Cancelada')"
+            (click)="changeStatus(listReservation, 'Cancelada')"
           ></button>
           <button
             pButton

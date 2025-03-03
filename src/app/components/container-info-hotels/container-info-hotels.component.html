@@ -1,69 +1,51 @@
 <div class="mx-auto max-w-7xl px-6 lg:px-8">
-  <div class="flex w-full flex-row flex-wrap justify-between items-center">
-
-    <div class="w-full max-w-2xl flex flex-row flex-wrap justify-between items-center">
-      <h2
-        class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:mx-0 lg:w-1/2 w-full"
-      >
-        Lista de Hoteles
-      </h2>
-      <div class="mx-auto lg:mx-0 lg:w-1/2 w-full">
-        <p-floatlabel variant="in">
-          <input
-            pInputText
-            id="in_label"
-            [(ngModel)]="search"
-            autocomplete="off"
-            
-          />
-          <label for="in_label">Buscar</label>
-        </p-floatlabel>
-
-    </div>
-    </div>
-
-  </div>
-
-  <div
-    class="mx-auto mt-5 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-  >
+  <div class="flex w-full items-center justify-between px-4 py-4 bg-white rounded-lg">
   
-    <article
-      class="flex max-w-xl flex-col items-start justify-between"
-      *ngFor="let hotel of listHotels | filterHotels: search"
-    >
-      <div (click)="selectHotel(hotel)">
-        <div class="flex items-center gap-x-4 text-xs">
-          <p
-            class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-          >
-            Hotel
-          </p>
-        </div>
-        <div class="group relative">
-          <h3
-            class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600"
-          >
-            <p>
-              <span class="absolute inset-0"></span>
-              {{ hotel.name }}
-            </p>
-          </h3>
-          <p class="mt-5 line-clamp-3 text-sm/6 text-gray-600">
-            {{ hotel.details }}
-          </p>
-        </div>
-        <div class="relative mt-8 flex items-center gap-x-4">
-          <img
-            [src]="sanitizeURL(hotel.name.replace(' ', '+'))"
-            alt=""
-            class="size-10 rounded-full bg-gray-50"
-          />
-          <div class="text-sm/6">
-            <p class="text-gray-600">{{ hotel.location }}</p>
-          </div>
+    <h2 class="text-3xl font-bold text-gray-900 flex-shrink-0">
+      🏨 Lista de Hoteles
+    </h2>
+    <div class="relative w-full max-w-sm">
+      <p-iconfield>
+        <p-inputicon styleClass="pi pi-search" />
+        <input type="text" pInputText  placeholder="Buscar hoteles..." class="w-full px-4 py-2 rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" [(ngModel)]="search"/>
+    </p-iconfield>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-5 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3" *ngIf="listHotels.length>0"
+  >
+  <div class="w-96 h-40 bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl group" *ngFor="let hotel of listHotels | filterHotels: search; let i = index">
+    <div class="flex" (click)="selectHotel(hotel)">
+      <div class="w-1/3 overflow-hidden">
+        <img src="{{listImages[i].webformatURL}}" 
+             alt="Hotel" 
+             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+      </div>
+      
+      <div class="w-2/3 p-4" >
+        <h2 class="text-lg font-semibold text-gray-800">{{hotel.name}}</h2>
+        <p class="text-sm text-gray-600 mt-1">{{hotel.details}}</p>
+        <div class="flex items-center text-gray-500 text-sm mt-2">
+          <svg class="w-4 h-4 text-blue-500 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 2a6 6 0 00-6 6c0 4.418 6 10 6 10s6-5.582 6-10a6 6 0 00-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" clip-rule="evenodd"/>
+          </svg>
+          <span>{{hotel.location}}</span>
         </div>
       </div>
-    </article>
+    </div>
+  </div>
+  
+  </div>
+
+  <div *ngIf="listHotels.length==0">
+    <div class="flex flex-col items-center justify-center h-96 text-center">
+      <i class="pi pi-search text-gray-400" style="font-size: 6rem;"></i>
+            <h3 class="text-2xl font-semibold text-gray-700 mt-4">
+        No hay hoteles disponibles
+      </h3>
+      <p class="text-gray-500 mt-2">
+        Intenta nuevamente más tarde.
+      </p>
+    </div>
   </div>
 </div>

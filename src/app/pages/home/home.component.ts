@@ -8,7 +8,7 @@ import { ModalLoginComponent } from "../../components/modal-login/modal-login.co
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, LoginComponent, GalleriaComponent, TabsHomeComponent, ModalLoginComponent],
+  imports: [HeaderComponent, GalleriaComponent, TabsHomeComponent, ModalLoginComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.sass',
   standalone: true,

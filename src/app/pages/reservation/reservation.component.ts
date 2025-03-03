@@ -1,13 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { ReservationsServiceService } from '../../core/services/reservations-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IReservationsDetails } from '../../core/interfaces/reservations.interface';
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from 'primeng/skeleton';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-reservation',
-  imports: [CommonModule,SkeletonModule],
+  imports: [CommonModule,SkeletonModule, CardModule, ButtonModule],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.sass'
 })
@@ -15,6 +17,7 @@ export class ReservationComponent {
   reservationsService = inject(ReservationsServiceService);
   idReservation = '';
   route = inject(ActivatedRoute);
+  router = inject(Router);
   reservation: IReservationsDetails = {} as IReservationsDetails;
   loading = false;
 
@@ -31,5 +34,8 @@ export class ReservationComponent {
       this.loading = false;
     
     });
+  }
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 }

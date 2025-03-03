@@ -36,7 +36,7 @@
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
         <a href="/home" class="text-sm/6 font-semibold text-gray-900">Home</a>
-        <a href="/my-reservations" class="text-sm/6 font-semibold text-gray-900"
+        <a  *ngIf="sessionSignal()" href="/my-reservations" class="text-sm/6 font-semibold text-gray-900"
           >Mis reservas</a
         >
       </div>

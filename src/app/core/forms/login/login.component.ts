@@ -9,6 +9,8 @@ import {
 import { ILogin, IUser } from '../../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { ModalService } from '../../services/modal.service';
+import { ImageHotelsService } from '../../services/image-hotels.service';
+import { SesionService } from '../../services/sesion.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,9 @@ export class LoginComponent {
   private router = inject(Router);
   private userService = inject(UserServiceService);
   private modalService = inject(ModalService);  
+  private sessionService = inject(SesionService);
+  @Output() openRegister = new EventEmitter<void>();
+  
   constructor() {}
 
 
@@ -30,22 +35,29 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
+
   login() {
     this.userService
       .login(this.loginForm.getRawValue() as ILogin)
       .subscribe((response: IUser) => {
         if (response.id) {
+          this.sessionService.setSession(response);
+
           localStorage.setItem('session', JSON.stringify(response));
 
           if (response.type.toString() === 'Agente') {
             this.router.navigate(['admin']);
-            this.cancel();
           }
+          this.cancel();
         }
       });
   }
   cancel() {
     this.modalService.setStateLogin(false);
     this.loginForm.reset();
+  }
+
+  openRegisterForm() {
+    this.openRegister.emit();
   }
 }

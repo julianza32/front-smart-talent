@@ -31,10 +31,17 @@ export class RoomsServiceService {
   getRoomsByHotel(id: string) {
     return this.http.get<IRooms[]>(`${environment.apiUrl}/rooms/get-by-hotel/${id}`);
   }
+
   getRoomsByType(type: string) {
     return this.http.get<IRooms[]>(`${environment.apiUrl}/rooms/get-by-type/${type}`);
   }
-  getRoomsByStatus(status: string) {
-    return this.http.get<IRooms[]>(`${environment.apiUrl}/rooms/get-by-status/${status}`);
+  getRoomsByStatus(id: string) {
+    return this.http.get<IRooms[]>(`${environment.apiUrl}/rooms/get-by-hotel/enabled/${id}`);
   }
+
+  updateStatusRoom(id: string, status: string) {
+    return this.http.post(`${environment.apiUrl}/rooms/toggle-status/${id}/${status}`,{});
+  }
+
+
 }

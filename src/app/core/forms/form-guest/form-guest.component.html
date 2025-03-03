@@ -13,11 +13,13 @@
 
   <div class="px-2 mt-5">
     <p-floatlabel variant="in" class="w-full">
-      <p-datepicker
+      <p-calendar
         id="birthDate"
         class="w-full full-width-calendar"
         showIcon
         formControlName="birthDate"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
       />
       <label for="birthDate">Fecha de Nacimiento</label>
     </p-floatlabel>
@@ -76,7 +78,7 @@
     class="mt-5 mr-1"
     pButton
     type="submit"
-    label="Guardar"
+    label="Añadir Huésped"
     [disabled]="formGuest.invalid"
   ></button>
 </form>

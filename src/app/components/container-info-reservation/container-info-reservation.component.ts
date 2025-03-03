@@ -7,6 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
+import { SesionService } from '../../core/services/sesion.service';
 
 @Component({
   selector: 'app-container-info-reservation',
@@ -25,28 +26,29 @@ export class ContainerInfoReservationComponent {
   router = inject(Router);
   navigateToReservation(id: string) {
     console.log(id);
-    
+
     this.router.navigate([`/reserva/${id}`]);
   }
 
   private formBuilder = inject(FormBuilder);
+  private sesionService = inject(SesionService);
   private serviceReserations = inject(ReservationsServiceService);
   formSearch = this.formBuilder.group({
     search: ['', Validators.required],
   });
-  submitForm() {
-    if (this.formSearch.valid) {
-      this.getReservations(this.formSearch.value.search ?? '');
-    }
+  ngOnInit() {
+    this.getReservations();
   }
 
-  getReservations(idUser: string) {
+  getReservations() {
     {
-      this.serviceReserations
-        .getReservationsByUser(idUser)
-        .subscribe((response: IReservationsDetails[]) => {
-          this.reservations = response;
-        });
+      this.sesionService.session$.subscribe((user) => {
+        this.serviceReserations
+          .getReservationsByUser(user?.id ?? '')
+          .subscribe((response: IReservationsDetails[]) => {
+            this.reservations = response;
+          });
+      });
     }
   }
 }

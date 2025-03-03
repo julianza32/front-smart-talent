@@ -5,6 +5,8 @@ import { IRooms } from '../../core/interfaces/room.interface';
 import { HotelsServiceService } from '../../core/services/hotels-service.service';
 import { LoadingComponent } from '../loading/loading.component';
 import { CommonModule } from '@angular/common';
+import { IResponseHits } from '../../core/interfaces/response_images.interface';
+import { ImageHotelsService } from '../../core/services/image-hotels.service';
 
 @Component({
   selector: 'app-list-rooms-home',
@@ -15,8 +17,10 @@ import { CommonModule } from '@angular/common';
 export class ListRoomsHomeComponent {
   service = inject(RoomsServiceService);
   serviceHotel = inject(HotelsServiceService);
+  serviceImage = inject(ImageHotelsService);
   idHotel = '';
   listRooms: IRooms[] = [];
+  listImages: IResponseHits[] = [];
 loading = false;
   ngOnInit () {
     this.serviceHotel.hotel$.subscribe((id) => {
@@ -26,9 +30,14 @@ loading = false;
   }
   getRooms(idHotel: string) {
     this.loading = true;
-    this.service.getRoomsByHotel(idHotel).subscribe((rooms:IRooms[]) => {
+    this.service.getRoomsByStatus(idHotel).subscribe((rooms:IRooms[]) => {
       this.listRooms = rooms;
+    });
+
+    this.serviceImage.getRoomsImages(idHotel, this.listRooms.length < 3 ? '5' : this.listRooms.length.toString()).subscribe((response) => {
+      this.listImages = response;
       this.loading = false;
+
     });
   }
 }

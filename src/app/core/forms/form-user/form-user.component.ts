@@ -25,6 +25,7 @@ export class FormUserComponent {
   private userService = inject(UserServiceService);
   private modalService = inject(ModalService);
   @Input() user: IUser | null = null;
+  @Input() agent: boolean = false;
   @Output() saveUser = new EventEmitter<boolean>();
 
   formUser = this.formBuilder.group({
@@ -47,7 +48,7 @@ export class FormUserComponent {
     if (this.formUser.valid) {
       const user = {
         ...this.formUser.value,
-        type: 'Agente',
+        type: this.agent?'Agente': 'Viajero',
       };
       this.userService.create(user as IUser).subscribe((response: IUser) => {
         this.saveUser.emit(true);
